@@ -5,6 +5,7 @@ SET(OpenCV_DIR /home/heaven7/heaven7/libs/opencv-3.4.7/opencv-4.5.4/_install/lib
 SET(ModelM_DIR /media/heaven7/Elements_SE/study/work/libs/hsy_moduleM)
 
 SET(PYTHOD_DIR /home/heaven7/miniconda3/envs/py38)
+SET(FD_LIB_DIR /media/heaven7/Elements_SE/study/work/OCR/FD_LIBS)
 
 ##
 SET(PYTHON_INCLUDE_DIR ${PYTHOD_DIR}/include/python3.8)

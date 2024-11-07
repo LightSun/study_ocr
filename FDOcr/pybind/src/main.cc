@@ -193,7 +193,7 @@ PYBIND11_MODULE(fastdeploy_main, m) {
 
 namespace h7 {
 
-PYBIND11_MODULE(OcrInfer_main, m) {
+PYBIND11_MODULE(PyOcrInfer_main, m) {
   m.doc() =
       "Make programer easier to use ocr-infer";
   m.def("set_logger", &fastdeploy::SetLogger);
