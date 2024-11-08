@@ -38,6 +38,14 @@ void BindEDM(pybind11::module& m){
 
 void BindOcrInfer(pybind11::module& m){
     using OCRResult = fastdeploy::vision::OCRResult;
+    pybind11::enum_<RunModeType>(m, "RunMode", pybind11::arithmetic(),
+                                 "RunMode for inference.")
+            .value("PADDLE", RunModeType::kPADDLE)
+            .value("TRT_F32", RunModeType::kTRT_F32)
+            .value("TRT_F16", RunModeType::kTRT_F16)
+            .value("TRT_INT8", RunModeType::kTRT_INT8)
+            .value("OPENVINO", RunModeType::kOpenvino);
+    //
     pybind11::class_<OcrConfig>(m, "OcrConfig")
             .def(pybind11::init<>())
             .def_readwrite("cache_dir", &OcrConfig::cache_dir)
@@ -48,17 +56,18 @@ void BindOcrInfer(pybind11::module& m){
             .def_readwrite("rec_label_file", &OcrConfig::rec_label_file)
             .def_readwrite("device", &OcrConfig::device)
             .def_readwrite("gpu_id", &OcrConfig::gpu_id)
-            .def_readwrite("run_mode", &OcrConfig::run_mode)
+            //.def_readwrite("run_mode", &OcrConfig::run_mode)
             .def_readwrite("max_batch_cls", &OcrConfig::max_batch_cls)
             .def_readwrite("max_batch_rec", &OcrConfig::max_batch_rec)
             .def_readwrite("debug", &OcrConfig::debug)
             .def_readwrite("logFile", &OcrConfig::logFile)
+            .def_property("run_mode", &OcrConfig::getRunMode, &OcrConfig::setRunMode)
             ;
 
     pybind11::class_<OCRResult>(m, "OCRResult")
           .def(pybind11::init())
           .def_readwrite("boxes", &OCRResult::boxes)
-          .def_readwrite("text", &OCRResult::text)
+          .def_readwrite("texts", &OCRResult::text)
           .def_readwrite("rec_scores", &OCRResult::rec_scores)
           .def_readwrite("cls_scores", &OCRResult::cls_scores)
           .def_readwrite("cls_labels", &OCRResult::cls_labels)

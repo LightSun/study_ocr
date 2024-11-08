@@ -31,11 +31,46 @@ struct OcrConfig{
 
     float threshold {0.5f};
     int gpu_id {0};
-    int run_mode {kTRT_F32};
+    int run_mode {kPADDLE};
     int max_batch_cls {6};
     int max_batch_rec {8};
     bool debug {false};
     String logFile;
+
+    String getRunMode(){
+        switch (run_mode) {
+        default:
+        case kPADDLE:
+            return "PADDLE";
+
+        case kTRT_F32:
+            return "TRT_F32";
+
+        case kTRT_F16:
+            return "TRT_F16";
+
+        case kTRT_INT8:
+            return "TRT_INT8";
+        case kOpenvino:
+            return "OPENVINO";
+        }
+    }
+    void setRunMode(const String& mode){
+        if(mode == "PADDLE"){
+            run_mode = kPADDLE;
+        }else if(mode == "TRT_F32"){
+            run_mode = kTRT_F32;
+        }else if(mode == "TRT_F16"){
+            run_mode = kTRT_F16;
+        }else if(mode == "TRT_INT8"){
+            run_mode = kTRT_INT8;
+        }else if(mode == "OPENVINO"){
+            run_mode = kOpenvino;
+        }else{
+            fprintf(stderr, "wrong run mode for OcrInfer.");
+            abort();
+        }
+    }
 };
 
 }
