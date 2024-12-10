@@ -18,6 +18,11 @@ enum RunModeType{
     kOpenvino
 };
 
+enum OcrVersion{
+    kOCR_V4_CH,
+    kOCR_V4_EN,
+};
+
 struct OcrConfig{
     String cache_dir;
     String model_desc_dir;
@@ -30,6 +35,7 @@ struct OcrConfig{
     String device {"GPU"}; //GPU or CPU
 
     float threshold {0.5f};
+    int ocrVersion {kOCR_V4_CH};
     int gpu_id {0};
     int run_mode {kPADDLE};
     int max_batch_cls {6};

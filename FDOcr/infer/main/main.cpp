@@ -32,6 +32,7 @@ void test1(){
     String inDir = "/media/heaven7/Elements_SE/study/work/OCR/local";
     String imgPath = inDir + "/test.jpeg";
     auto img = cv::imread(imgPath);
+    //cv::imwrite(inDir + "/test.png", img);
    // for(int i = 0 ; i < 100 ; ++ i)
     {
         fastdeploy::vision::OCRResult result;

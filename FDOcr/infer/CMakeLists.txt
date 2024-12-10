@@ -11,7 +11,6 @@ message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 
 ## MM
 include_directories(${ModelM_DIR}/include)
-SET(ModelM_libs ${ModelM_DIR}/lib/libModelM_shared.so)
 
 ## lib
 file(GLOB_RECURSE SRC_LIB_OCR
@@ -25,6 +24,17 @@ add_library(OcrInfer
     )
 
 target_link_libraries(OcrInfer PUBLIC
+    ${FastDeploy_LIBS}
+    ${ModelM_libs}
+    ${OpenCV_LIBS}
+    )
+
+## lib_shared
+add_library(OcrInfer_shared SHARED
+    ${SRC_LIB_OCR}
+    )
+
+target_link_libraries(OcrInfer_shared PUBLIC
     ${FastDeploy_LIBS}
     ${ModelM_libs}
     ${OpenCV_LIBS}

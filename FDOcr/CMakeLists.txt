@@ -13,6 +13,7 @@ include(cmake/ENV.cmake)
 
 include_directories(./)
 SET(PY_BIND11_DIR ${CMAKE_CURRENT_SOURCE_DIR}/third_party/pybind11)
+SET(ModelM_libs ${ModelM_DIR}/lib/libModelM_shared.so)
 
 #fd
 find_package(FastDeploy)
@@ -21,4 +22,6 @@ include_directories(${FastDeploy_INCLUDE_DIRS})
 add_subdirectory(infer/)
 add_subdirectory(third_party/pybind11)
 add_subdirectory(pybind/)
+add_subdirectory(http_service/)
+add_subdirectory(PyEncDec/)
 
